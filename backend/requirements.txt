@@ -1,0 +1,11 @@
+Django==2.2.20
+djangorestframework==3.14.0
+djangorestframework-simplejwt==4.7.2
+django-filter==22.1
+django-extra-fields==3.2.15
+drf-base64==2.0
+djoser==2.1.0
+psycopg2-binary==2.8.6
+python-dotenv==0.20.0
+Pillow==9.2.0
+isort==5.10.1
