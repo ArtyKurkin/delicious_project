@@ -136,10 +136,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             ) for ingredient in ingredients]
         )
 
-    def get_ingredients(self, obj):
-        ingredients = IngredientRecipe.objects.filter(recipe=obj)
-        return IngredientRecipeListSerializer(ingredients).data
-
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')
         tags = validated_data.pop('tags')

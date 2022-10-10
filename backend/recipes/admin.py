@@ -10,7 +10,7 @@ class RecipeIngredientInline(admin.TabularInline):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'author', )
+    list_display = ('pk', 'name', 'author', )
     search_fields = ('author', 'name', 'tags', )
     list_filter = ('author', 'name', 'tags', )
     inlines = [RecipeIngredientInline, ]
@@ -22,7 +22,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'measurement_unit', )
+    list_display = ('pk', 'name', 'measurement_unit', )
     search_fields = ('name', )
     list_filter = ('name', )
     inlines = [RecipeIngredientInline, ]
@@ -31,7 +31,7 @@ class IngredientAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'color', 'slug', )
+    list_display = ('pk', 'name', 'color', 'slug', )
     search_fields = ('name', )
     list_filter = ('name', )
     empty_value_display = '-пусто-'
@@ -39,7 +39,7 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(ShoppingCart)
 class ShoppingCartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'recipe', )
+    list_display = ('pk', 'user', 'recipe', )
     search_fields = ('user', 'recipe', )
     list_filter = ('user', )
     empty_value_display = '-пусто-'
@@ -47,7 +47,7 @@ class ShoppingCartAdmin(admin.ModelAdmin):
 
 @admin.register(Favorite)
 class FavoriteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'recipe', )
+    list_display = ('pk', 'user', 'recipe', )
     search_fields = ('user', 'recipe', )
     list_filter = ('user', )
     empty_value_display = '-пусто-'
@@ -55,7 +55,7 @@ class FavoriteAdmin(admin.ModelAdmin):
 
 @admin.register(Subscribe)
 class SubscribeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'author', )
+    list_display = ('pk', 'user', 'author', )
     search_fields = ('user', )
     list_filter = ('user', )
     empty_value_display = '-пусто-'
