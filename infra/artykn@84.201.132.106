@@ -1,7 +1,0 @@
-DB_ENGINE=django.db.backends.postgresql_psycopg2 # указываем, что работаем с postgresql
-DB_NAME=postgres # имя базы данных
-POSTGRES_USER=postgres # логин для подключения к базе данных
-POSTGRES_PASSWORD=postgres # пароль для подключения к БД (установите свой)
-DB_HOST=db # название сервиса (контейнера)
-DB_PORT=5432 # порт для подключения к БД
-SECRET_KEY='7wsyrx6eu8_-wt&4^52@11c0ygm(1uyjy!z@1z(xe5@x4v!b=p'
