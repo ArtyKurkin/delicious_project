@@ -63,7 +63,6 @@ jobs:
           script: |
             sudo docker pull artykn/foodgram_backend:latest
             sudo docker pull artykn/foodgram_frontend:latest
-            cd infra/
             sudo docker-compose stop
             sudo docker-compose rm backend
       - name: docker-compose up
