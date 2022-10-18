@@ -10,7 +10,7 @@ services:
       - ./.env
 
   backend:
-    image: artykn/backend:latest
+    image: artykn/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -21,7 +21,7 @@ services:
       - ./.env
 
   frontend:
-    image: artykn/frontend:latest
+    image: artykn/foodgram_frontend:latest
     volumes:
       - result_build:/app/result_build/build/
     depends_on:
@@ -32,7 +32,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./default .conf:/etc/nginx/conf.d/default.conf
       - result_build:/usr/share/nginx/html/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
