@@ -21,11 +21,11 @@ class RecipeFilter(filters.FilterSet):
     tags = filters.AllValuesMultipleFilter(
         field_name='tags__slug',
         label='Ссылка')
-    is_favorite = filters.NumberFilter(method='get_is_favorite')
+    is_favorited = filters.NumberFilter(method='get_is_favorited')
     is_in_shopping_cart = filters.NumberFilter(
         method='get_is_in_shopping_cart'
     )
 
     class Meta:
         model = Recipe
-        fields = ('is_favorite', 'is_in_shopping_cart', 'author', 'tags')
+        fields = ('is_favorited', 'is_in_shopping_cart', 'author', 'tags')
