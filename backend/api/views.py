@@ -180,7 +180,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
         for position, ingredient in enumerate(ingredients, start=1):
             shopping_cart.append(
                 f'\n{position}. {ingredient["ingredient__name"]}:'
-                f' {ingredient["amount"]}'
+                f' {ingredient["amount_sum"]}'
                 f'({ingredient["ingredient__measurement_unit"]})'
             )
         response = HttpResponse(shopping_cart, content_type='text/csv')
