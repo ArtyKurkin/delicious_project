@@ -86,10 +86,10 @@ class RecipeListSerializer(serializers.ModelSerializer):
     ingredients = IngredientRecipeListSerializer(
         many=True,
         source='ingredient_recipe')
-    is_favorited = serializers.SerializerMethodField()
+    is_favorite = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
 
-    def get_is_favorited(self, obj):
+    def get_is_favorite(self, obj):
         user = self.context['request'].user
         if user.is_anonymous:
             return False
@@ -105,7 +105,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = ('id', 'tags', 'author', 'ingredients',
-                  'is_favorited', 'is_in_shopping_cart',
+                  'is_favorite', 'is_in_shopping_cart',
                   'name', 'image', 'text', 'cooking_time',)
 
 
