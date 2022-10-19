@@ -171,7 +171,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
     )
     def download_shopping_cart(self, request):
         ingredients = IngredientRecipe.objects.filter(
-            recipe__carts__user=request.user.id
+            recipe__shopping_cart__user=request.user.id
         ).values(
             'ingredient__name',
             'ingredient__measurement_unit'
