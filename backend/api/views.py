@@ -163,7 +163,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
         permission_classes=(IsAuthenticated,)
     )
     def shopping_cart(self, request, pk):
-        return self.get_list(request=request, list_model=ShoppingCart, pk=pk)
+        return self.__favorite_list(request=request, list_model=ShoppingCart, pk=pk)
 
     @action(
         detail=False,
