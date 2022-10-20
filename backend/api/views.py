@@ -161,10 +161,9 @@ class RecipesViewSet(viewsets.ModelViewSet):
         methods=['DELETE', 'POST'],
         detail=True,
         permission_classes=(IsAuthenticated,),
-        pagination_class=PageNumberPagination
     )
     def shopping_cart(self, request, pk):
-        return self.__favorite_list(request=request, list_model=ShoppingCart, pk=pk)
+        return self.__favorite_list(request, pk, ShoppingCart)
 
     @action(
         detail=False,
