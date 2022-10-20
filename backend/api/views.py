@@ -18,7 +18,8 @@ from .permissions import IsAuthorOrAdminOrReadOnly
 from .serializers import (CustomUserSerializer, FavoriteSerializer,
                           IngredientSerializer, PasswordSerializer,
                           RecipeCreateSerializer, RecipeListSerializer,
-                          SubscribeSerializer, TagSerializer)
+                          SubscribeSerializer, TagSerializer,
+                          ShoppingCartSerializer)
 
 
 class SetPasswordAndSubscribeViewSet(UserViewSet):
@@ -161,8 +162,29 @@ class RecipesViewSet(viewsets.ModelViewSet):
         detail=True,
         permission_classes=(IsAuthenticated,)
     )
-    def shopping_cart(self, request, pk=None):
-        return self.__favorite_list(request=request, list_model=ShoppingCart, pk=pk)
+    def shopping_cart(self, request, pk):
+        recipe = get_object_or_404(Recipe, pk=pk)
+        user = request.user
+        if request.method == 'GET':
+            recipe, created = ShoppingCart.objects.get_or_create(
+                user=user, recipe=recipe
+            )
+            if created is True:
+                serializer = ShoppingCartSerializer()
+                return Response(
+                    serializer.to_representation(instance=recipe),
+                    status=status.HTTP_201_CREATED
+                )
+            return Response(
+                {'errors': 'Рецепт уже в корзине покупок'},
+                status=status.HTTP_201_CREATED
+            )
+        if request.method == 'DELETE':
+            ShoppingCart.objects.filter(
+                user=user, recipe=recipe
+            ).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     @action(
         detail=False,
