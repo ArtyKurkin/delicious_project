@@ -115,39 +115,27 @@ class RecipesViewSet(viewsets.ModelViewSet):
     pagination_class = PageNumberPagination
 
     @staticmethod
-    def __favorite_list(request, pk, list_model):
-        if request.method == 'POST':
-            if list_model.objects.filter(user=request.user,
-                                         recipe__id=pk).exists():
-                return Response(
-                    {'errors': 'Рецепт уже в избранном!'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            recipe = get_object_or_404(Recipe, id=pk)
-            list_model.objects.create(user=request.user, recipe=recipe)
-            serializer = FavoriteSerializer(
-                recipe, context={'request': request}
-            )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        recipe = list_model.objects.filter(user=request.user, recipe__id=pk)
-        if recipe.exists():
-            recipe.delete()
-            return Response(
-                {'msg': 'Успешно удалено!'},
-                status=status.HTTP_204_NO_CONTENT
-            )
-        return Response(
-            {'error': 'Рецепта нет в избранном!'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    def _add_recipe(model, request, pk):
+        recipe = get_object_or_404(Recipe, id=pk)
+        model.objects.create(recipe=recipe, user=request.user)
+        serializer = FavoriteSerializer(recipe)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+    @staticmethod
+    def _delete_recipe(model, request, pk):
+        recipe = get_object_or_404(Recipe, id=pk)
+        model.objects.filter(recipe=recipe, user=request.user).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(
-        methods=['POST', 'DELETE'],
         detail=True,
-        permission_classes=[IsAuthenticated, ]
+        methods=['POST', 'DELETE'],
+        permission_classes=(IsAuthenticated,)
     )
-    def favorite(self, request, pk):
-        return self.__favorite_list(request, pk, Favorite)
+    def favorite(self, request, pk=None):
+        if request.method == 'POST':
+            return self._add_recipe(Favorite, request, pk)
+        return self._delete_recipe(Favorite, request, pk)
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
@@ -158,12 +146,14 @@ class RecipesViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     @action(
-        methods=['DELETE', 'POST'],
         detail=True,
-        permission_classes=(IsAuthenticated,),
+        methods=['POST', 'DELETE'],
+        permission_classes=(IsAuthenticated,)
     )
     def shopping_cart(self, request, pk):
-        return self.__favorite_list(request, pk, ShoppingCart)
+        if request.method == 'POST':
+            return self._add_recipe(ShoppingCart, request, pk)
+        return self._delete_recipe(ShoppingCart, request, pk)
 
     @action(
         detail=False,
