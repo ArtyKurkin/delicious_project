@@ -123,7 +123,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         serializer = self.get_serializer()
         queryset = Recipe.objects.all()
-        return serializer.get_related_queries(queryset)
+        return serializer.get_serializer_class(queryset)
 
     @action(
         detail=False,
