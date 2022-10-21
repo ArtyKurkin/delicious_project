@@ -19,8 +19,7 @@ from .permissions import IsAuthorOrAdminOrReadOnly
 from .serializers import (CustomUserSerializer, FavoriteSerializer,
                           IngredientSerializer, PasswordSerializer,
                           RecipeCreateSerializer, RecipeListSerializer,
-                          SubscribeSerializer, TagSerializer,
-                          ShoppingCartSerializer)
+                          SubscribeSerializer, TagSerializer)
 
 
 class SetPasswordAndSubscribeViewSet(UserViewSet):
