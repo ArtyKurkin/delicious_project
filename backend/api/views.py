@@ -1,4 +1,3 @@
-from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
@@ -13,6 +12,7 @@ from recipes.models import (Favorite, Ingredient, IngredientRecipe, Recipe,
                             ShoppingCart, Subscribe, Tag)
 from users.models import User
 
+from .utils import get_shopping_list
 from .filters import IngredientFilter, RecipeFilter
 from .mixins import RetrieveListViewSet
 from .permissions import IsAuthorOrAdminOrReadOnly
@@ -159,24 +159,11 @@ class RecipesViewSet(viewsets.ModelViewSet):
         detail=False,
         methods=['GET'],
         permission_classes=(IsAuthenticated,),
-        pagination_class=None
     )
+    @action(detail=False, methods=['GET'], url_path='download_shopping_cart')
     def download_shopping_cart(self, request):
-        ingredients = IngredientRecipe.objects.filter(
-            recipe__shopping_cart__user=request.user.id
-        ).values(
-            'ingredient__name',
-            'ingredient__measurement_unit'
-        ).annotate(amount_sum=Sum('amount'))
-        shopping_cart = ['Список покупок:\n--------------']
-        for position, ingredient in enumerate(ingredients, start=1):
-            shopping_cart.append(
-                f'\n{position}. {ingredient["ingredient__name"]}:'
-                f' {ingredient["amount_sum"]}'
-                f'({ingredient["ingredient__measurement_unit"]})'
-            )
-        response = HttpResponse(shopping_cart, content_type='text/csv')
-        response['Content-Disposition'] = (
-            'attachment;filename=shopping_cart.csv'
-        )
+        user = request.user
+        main_list = get_shopping_list(user)
+        response = HttpResponse(main_list, 'Content-Type: text/plain')
+        response['Content-Disposition'] = 'attachment; filename="Cart.txt"'
         return response
