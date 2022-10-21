@@ -112,7 +112,7 @@ class RecipesViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthorOrAdminOrReadOnly, )
     filter_backends = (DjangoFilterBackend, )
     filterset_class = RecipeFilter
-    pagination_class = PageNumberPagination
+    pagination_class = None
 
     @staticmethod
     def _add_recipe(model, request, pk):
