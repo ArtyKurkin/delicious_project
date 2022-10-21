@@ -148,7 +148,8 @@ class RecipesViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=['POST', 'DELETE'],
-        permission_classes=(IsAuthenticated,)
+        permission_classes=(IsAuthenticated,),
+        paginator=None
     )
     def shopping_cart(self, request, pk):
         if request.method == 'POST':
