@@ -160,7 +160,6 @@ class RecipesViewSet(viewsets.ModelViewSet):
         methods=['GET'],
         permission_classes=(IsAuthenticated,),
     )
-    @action(detail=False, methods=['GET'], url_path='download_shopping_cart')
     def download_shopping_cart(self, request):
         user = request.user
         main_list = get_shopping_list(user)
