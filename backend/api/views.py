@@ -149,7 +149,6 @@ class RecipesViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=['POST', 'DELETE'],
         permission_classes=(IsAuthenticated,),
-        paginator=None
     )
     def shopping_cart(self, request, pk):
         if request.method == 'POST':
@@ -159,7 +158,8 @@ class RecipesViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
         methods=['GET'],
-        permission_classes=(IsAuthenticated,)
+        permission_classes=(IsAuthenticated,),
+        pagination_class=None
     )
     def download_shopping_cart(self, request):
         ingredients = IngredientRecipe.objects.filter(
