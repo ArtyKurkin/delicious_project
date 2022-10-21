@@ -19,7 +19,8 @@ from .permissions import IsAuthorOrAdminOrReadOnly
 from .serializers import (CustomUserSerializer, FavoriteSerializer,
                           IngredientSerializer, PasswordSerializer,
                           RecipeCreateSerializer, RecipeListSerializer,
-                          SubscribeSerializer, TagSerializer)
+                          SubscribeSerializer, TagSerializer,
+                          ShoppingCartSerializer)
 
 
 class SetPasswordAndSubscribeViewSet(UserViewSet):
@@ -166,3 +167,13 @@ class RecipesViewSet(viewsets.ModelViewSet):
         response = HttpResponse(main_list, 'Content-Type: text/plain')
         response['Content-Disposition'] = 'attachment; filename="Cart.txt"'
         return response
+
+
+class ShoppingCartViewSet(viewsets.ModelViewSet):
+    serializer_class = FavoriteSerializer
+    permission_classes = (AllowAny, )
+    pagination_class = None
+
+    def get_queryset(self):
+        user = self.request.user
+        return Recipe.objects.filter(shopping_cart__user=user)
