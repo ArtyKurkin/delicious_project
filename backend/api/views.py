@@ -90,6 +90,9 @@ class SetPasswordAndSubscribeViewSet(UserViewSet):
 
 
 class TagsViewSet(RetrieveListViewSet):
+    """
+    List, retrieve and create Tags
+    """
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = (AllowAny, )
