@@ -6,6 +6,9 @@ User = get_user_model()
 
 
 class Ingredient(models.Model):
+    """
+    Ingredient model
+    """
     name = models.CharField(
         verbose_name='Название ингредиента',
         max_length=200
