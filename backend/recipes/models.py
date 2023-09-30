@@ -28,6 +28,9 @@ class Ingredient(models.Model):
 
 
 class Tag(models.Model):
+    """
+    Tag model
+    """
     username_validator = RegexValidator(
         regex=r'^[-a-zA-Z0-9_]+$',
         message=(
