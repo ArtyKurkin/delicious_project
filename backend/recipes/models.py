@@ -64,6 +64,9 @@ class Tag(models.Model):
 
 
 class Recipe(models.Model):
+    """
+    Recipe model
+    """
     author = models.ForeignKey(
         User,
         related_name='recipes',
