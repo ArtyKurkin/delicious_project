@@ -116,6 +116,9 @@ class Recipe(models.Model):
 
 
 class IngredientRecipe(models.Model):
+    """
+    IngredientRecipe model
+    """
     recipe = models.ForeignKey(
         Recipe,
         related_name='ingredient_recipe',
