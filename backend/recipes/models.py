@@ -152,6 +152,9 @@ class IngredientRecipe(models.Model):
 
 
 class ShoppingCart(models.Model):
+    """
+    Shopping cart model
+    """
     user = models.ForeignKey(
         User,
         related_name='shopping_cart',
