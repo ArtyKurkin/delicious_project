@@ -210,6 +210,9 @@ class Favorite(models.Model):
 
 
 class Subscribe(models.Model):
+    """
+    Subscribe model
+    """
     user = models.ForeignKey(
         User,
         related_name='follower',
