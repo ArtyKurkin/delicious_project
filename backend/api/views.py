@@ -100,6 +100,9 @@ class TagsViewSet(RetrieveListViewSet):
 
 
 class IngredientsViewSet(RetrieveListViewSet):
+    """
+    List, retrieve and create Tags
+    """
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     permission_classes = (AllowAny, )
