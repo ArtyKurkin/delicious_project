@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Ingredient(models.Model):
     """
-    Ingredient model
+    Ingredient model.
     """
     name = models.CharField(
         verbose_name='Название ингредиента',
@@ -29,7 +29,7 @@ class Ingredient(models.Model):
 
 class Tag(models.Model):
     """
-    Tag model
+    Tag model.
     """
     username_validator = RegexValidator(
         regex=r'^[-a-zA-Z0-9_]+$',
@@ -65,7 +65,7 @@ class Tag(models.Model):
 
 class Recipe(models.Model):
     """
-    Recipe model
+    Recipe model.
     """
     author = models.ForeignKey(
         User,
@@ -117,7 +117,7 @@ class Recipe(models.Model):
 
 class IngredientRecipe(models.Model):
     """
-    IngredientRecipe model
+    IngredientRecipe model.
     """
     recipe = models.ForeignKey(
         Recipe,
@@ -153,7 +153,7 @@ class IngredientRecipe(models.Model):
 
 class ShoppingCart(models.Model):
     """
-    Shopping cart model
+    Shopping cart model.
     """
     user = models.ForeignKey(
         User,
@@ -182,7 +182,7 @@ class ShoppingCart(models.Model):
 
 class Favorite(models.Model):
     """
-    Favorite model
+    Favorite model.
     """
     user = models.ForeignKey(
         User,
@@ -211,7 +211,7 @@ class Favorite(models.Model):
 
 class Subscribe(models.Model):
     """
-    Subscribe model
+    Subscribe model.
     """
     user = models.ForeignKey(
         User,
