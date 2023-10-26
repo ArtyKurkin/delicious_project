@@ -45,7 +45,7 @@ sudo docker-compose exec backend python manage.py collectstatic --no-input
 sudo docker-compose exec backend python manage.py load_ingredients
 sudo docker-compose exec backend python manage.py load_tags
 ```
-## Регистрация и авторизация
+## Регистрация и авторизация.
 
 В проекте доступна система регистрации и авторизации пользователей.
 #### Обязательные поля для пользователя:
