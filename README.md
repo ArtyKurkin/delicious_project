@@ -1,7 +1,7 @@
 # Проект Foodgram <<Продуктовый помощник>>
 ![example workflow](https://github.com/ArtyKurkin/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/)
-## Описание:
+## Описание
 
 ###### Сервис позволяет публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список «Избранное», а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
 
