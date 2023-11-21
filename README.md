@@ -1,4 +1,4 @@
-# Проект Foodgram <<Продуктовый помощник>>
+# Delicious project
 ![example workflow](https://github.com/ArtyKurkin/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=ffffff&color=043A6B)](https://www.python.org/)
 ## Описание:
